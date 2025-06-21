@@ -20,6 +20,12 @@ post-outlined polygons on the right:
 
 ![dump.png output of ./polygons](ref.png)
 
+Note, the hole (blue triangle) on the left, does not survive the Union
+merging, because it is overwritten by a triangle that envelops it. On
+the other hand, the gap between the three partially overlapping
+triangles on the left emerges as a hole within the red polygon outline
+after the Union operation.
+
 ## License info
 
 The `polygons` example program is distributed with the same BSD
