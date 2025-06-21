@@ -6,11 +6,10 @@ package main
 import (
 	"image"
 	"image/color"
+	"image/draw"
 	"image/png"
 	"log"
 	"os"
-
-	"golang.org/x/image/vector"
 
 	"zappem.net/pub/graphics/raster"
 	"zappem.net/pub/math/polygon"
@@ -46,7 +45,8 @@ func (a *Affine) To(x float64) float64 {
 
 func visualize(name string, before, after *polygon.Shapes) {
 	im := image.NewRGBA(image.Rect(0, 0, 500, 250))
-	rast := vector.NewRasterizer(500, 250)
+	draw.Draw(im, im.Bounds(), &image.Uniform{color.RGBA{0xff, 0xff, 0xff, 0xff}}, image.ZP, draw.Src)
+	rast := raster.NewRasterizer()
 	mB, xB := 0., 0.
 	started := false
 	for _, p := range before.P {
@@ -80,15 +80,14 @@ func visualize(name string, before, after *polygon.Shapes) {
 			is := pts.PS[(j+1)%len(pts.PS)]
 			fromX, fromY := bAx.To(was.X), bAy.To(was.Y)
 			toX, toY := bAx.To(is.X), bAy.To(is.Y)
-			rast.MoveTo(float32(fromX), float32(toX))
 			raster.LineTo(rast, true, fromX, fromY, toX, toY, 3)
 		}
 		col := color.RGBA{0xff, 0x00, 0x00, 0xff}
 		if pts.Hole {
 			col = color.RGBA{0x00, 0x00, 0xff, 0xff}
 		}
-		raster.DrawAt(im, rast, 0, 0, col)
-		rast.Reset(500, 250)
+		rast.Render(im, 0, 0, col)
+		rast.Reset()
 	}
 	for _, pts := range before.P {
 		col := color.RGBA{0x00, 0x00, 0x00, 0xff}
@@ -96,8 +95,8 @@ func visualize(name string, before, after *polygon.Shapes) {
 			pt := pts.PS[j]
 			x, y := bAx.To(pt.X), bAy.To(pt.Y)
 			raster.PointAt(rast, x, y, 4)
-			raster.DrawAt(im, rast, 0, 0, col)
-			rast.Reset(500, 250)
+			rast.Render(im, 0, 0, col)
+			rast.Reset()
 		}
 	}
 	for _, pts := range after.P {
@@ -106,15 +105,14 @@ func visualize(name string, before, after *polygon.Shapes) {
 			is := pts.PS[(j+1)%len(pts.PS)]
 			fromX, fromY := aAx.To(was.X), aAy.To(was.Y)
 			toX, toY := aAx.To(is.X), aAy.To(is.Y)
-			rast.MoveTo(float32(fromX), float32(toX))
 			raster.LineTo(rast, true, fromX, fromY, toX, toY, 3)
 		}
 		col := color.RGBA{0xff, 0x00, 0x00, 0xff}
 		if pts.Hole {
 			col = color.RGBA{0x00, 0x00, 0xff, 0xff}
 		}
-		raster.DrawAt(im, rast, 0, 0, col)
-		rast.Reset(500, 250)
+		rast.Render(im, 0, 0, col)
+		rast.Reset()
 	}
 	for _, pts := range after.P {
 		col := color.RGBA{0x00, 0x00, 0x00, 0xff}
@@ -122,8 +120,8 @@ func visualize(name string, before, after *polygon.Shapes) {
 			pt := pts.PS[j]
 			x, y := aAx.To(pt.X), aAy.To(pt.Y)
 			raster.PointAt(rast, x, y, 4)
-			raster.DrawAt(im, rast, 0, 0, col)
-			rast.Reset(500, 250)
+			rast.Render(im, 0, 0, col)
+			rast.Reset()
 		}
 	}
 
