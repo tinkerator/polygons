@@ -3,7 +3,7 @@
 ## Overview
 
 This repository provides a small example of using the
-[`zappem.net/pub/math/polygon`](https://pkg.go.dev/zappem.net/pub/math/polygon)
+[`zappem.net/pub/math/polygon`](https://zappem.net/pub/math/polygon)
 package.
 
 The example program creates a space containing 5 overlapping triangles
