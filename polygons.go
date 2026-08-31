@@ -4,12 +4,14 @@
 package main
 
 import (
+	"flag"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/png"
 	"log"
 	"os"
+	"strings"
 
 	"zappem.net/pub/graphics/raster"
 	"zappem.net/pub/math/polygon"
@@ -139,13 +141,31 @@ func visualize(name string, before, after *polygon.Shapes) {
 	log.Printf("wrote result to %q", name)
 }
 
+var (
+	swallow = flag.Bool("swallow", true, "eliminate original holes")
+	dest    = flag.String("dest", "dump.png", "destination file, .png or .polys")
+)
+
 func main() {
+	flag.Parse()
 	ps := triangle(nil, 9, 10, 4)
 	ps = triangle(ps, 13, 12, 4)
 	ps = untriangle(ps, 11, 11, 1)
 	ps = triangle(ps, 13, 9, 4)
 	ps = triangle(ps, 20, 15, 4)
 	dup := ps.Duplicate()
+	var preserved *polygon.Shapes
+	if !*swallow {
+		preserved = ps.ProcessHoles()
+	}
 	ps.Union()
-	visualize("dump.png", dup, ps)
+	ps.Add(preserved)
+	if strings.HasSuffix(*dest, ".polys") {
+		if err := ps.JSONToFile(*dest); err != nil {
+			log.Fatalf("failed to write %q: %v", *dest, err)
+		}
+		log.Printf("wrote result to %q", *dest)
+		return
+	}
+	visualize(*dest, dup, ps)
 }

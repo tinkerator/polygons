@@ -1,8 +1,8 @@
-golang.org/x/image v0.39.0 h1:skVYidAEVKgn8lZ602XO75asgXBgLj9G/FE3RbuPFww=
-golang.org/x/image v0.39.0/go.mod h1:sIbmppfU+xFLPIG0FoVUTvyBMmgng1/XAMhQ2ft0hpA=
+golang.org/x/image v0.45.0 h1:FMb1nTbH5H9vF55SriQHgFw5GnNL9Jg6L25BwXKzhB0=
+golang.org/x/image v0.45.0/go.mod h1:n62x/7RqlwXDvGsSU4u6IUTUf6KghUZ9Bt7cG/T9Fx4=
+golang.org/x/sys v0.47.0 h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=
+golang.org/x/sys v0.47.0/go.mod h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=
 zappem.net/pub/graphics/raster v0.7.0 h1:ZwN1QCDDT+BuQIe5+G8WdUCaMzAtUvFX9FbaddtqapM=
 zappem.net/pub/graphics/raster v0.7.0/go.mod h1:sZP5CyRMDntlQQYrDzinmD505/9JbwXoAI3HoulnDvs=
-zappem.net/pub/math/polygon v0.9.15 h1:Aq0Dj3ilodxfXlDAQUtou+190JJzgC3qdM/Ww2Fxr8M=
-zappem.net/pub/math/polygon v0.9.15/go.mod h1:u6/3+TRLWGqqVIgArTaWPpZQDgg4O6YP51AUjjMYUG8=
-zappem.net/pub/math/polygon v0.9.19 h1:5VNi18906SDK6Qd95XiR1copeaSsBIMgvL9ZVUBPi40=
-zappem.net/pub/math/polygon v0.9.19/go.mod h1:u6/3+TRLWGqqVIgArTaWPpZQDgg4O6YP51AUjjMYUG8=
+zappem.net/pub/math/polygon v0.9.24 h1:KEsaLPl4G96SZilBXBWPrceXq2Ufjs1W8B5YEOrDss0=
+zappem.net/pub/math/polygon v0.9.24/go.mod h1:u6/3+TRLWGqqVIgArTaWPpZQDgg4O6YP51AUjjMYUG8=
